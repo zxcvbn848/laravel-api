@@ -8,3 +8,4 @@
 - [ ] Create the database
 - [ ] Design the APIs
 - [ ] Develop the APIs
+- [ ] Test the APIs
