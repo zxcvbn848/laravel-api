@@ -2,7 +2,7 @@
 
 ## TODO List
 
-- [ ] Create a new Laravel project
+- [X] Create a new Laravel project
 - [ ] Determine the project topic
 - [ ] Plan the project needs
 - [ ] Create the database
