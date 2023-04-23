@@ -1,6 +1,6 @@
 # laravel-api
 
-# TODO List
+## TODO List
 
 - [ ] Create a new Laravel project
 - [ ] Determine the project topic
