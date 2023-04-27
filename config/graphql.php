@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+use App\GraphQL\Schemas\DefaultSchema;
+
 return [
     'route' => [
         // The prefix for routes; do NOT use a leading slash!
@@ -73,27 +75,7 @@ return [
     //  ]
     //
     'schemas' => [
-        'default' => [
-            'query' => [
-                // ExampleQuery::class,
-            ],
-            'mutation' => [
-                // ExampleMutation::class,
-            ],
-            // The types only available in this schema
-            'types' => [
-                // ExampleType::class,
-            ],
-
-            // Laravel HTTP middleware
-            'middleware' => null,
-
-            // Which HTTP methods to support; must be given in UPPERCASE!
-            'method' => ['GET', 'POST'],
-
-            // An array of middlewares, overrides the global ones
-            'execution_middleware' => null,
-        ],
+        'default' => DefaultSchema::class,
     ],
 
     // The global types available to all schemas.
