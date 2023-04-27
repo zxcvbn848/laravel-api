@@ -4,15 +4,15 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\User;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class UpdateUserPasswordMutation extends Mutation
+class UpdateUserEmailMutation extends Mutation
 {
    protected $attributes = [
-      'name' => 'updateUserPassword'
+      'name' => 'updateUserEmail'
    ];
 
    public function type(): Type
@@ -25,12 +25,21 @@ class UpdateUserPasswordMutation extends Mutation
       return [
          'id' => [
             'name' => 'id', 
-            'type' => Type::nonNull(Type::string()),
+            'type' => Type::string(),
          ],
-         'password' => [
-            'name' => 'password', 
-            'type' => Type::nonNull(Type::string()),
+         'email' => [
+            'name' => 'email', 
+            'type' => Type::string(),
          ]
+      ];
+   }
+
+   protected function rules(array $args = []): array
+   {
+      return [
+         'id' => ['required'],
+         'email' => ['required', 'email'],
+         // 'password' => $args['id'] !== 1337 ? ['required'] : [],
       ];
    }
 
@@ -42,7 +51,7 @@ class UpdateUserPasswordMutation extends Mutation
          return null;
       }
 
-      $user->password = bcrypt($args['password']);
+      $user->email = $args['email'];
       $user->save();
 
       return $user;

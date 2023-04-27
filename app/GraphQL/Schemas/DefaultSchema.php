@@ -3,6 +3,7 @@
 namespace App\GraphQL\Schemas;
 
 use App\GraphQL\{
+	Mutations\UpdateUserEmailMutation,
 	Mutations\UpdateUserPasswordMutation,
 	Queries\UsersQuery,
 	Types\UserType,
@@ -22,6 +23,7 @@ class DefaultSchema implements ConfigConvertible
 			],
 			'mutation' => [
 				UpdateUserPasswordMutation::class,
+				UpdateUserEmailMutation::class,
 			],
 			'types' => [
 				UserType::class,
