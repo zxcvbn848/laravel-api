@@ -2,8 +2,11 @@
 
 namespace App\GraphQL\Schemas;
 
-use App\GraphQL\Queries\UsersQuery;
-use App\GraphQL\Types\UserType;
+use App\GraphQL\{
+    Mutations\UpdateUserPasswordMutation,
+    Queries\UsersQuery,
+    Types\UserType,
+};
 use Rebing\GraphQL\Support\Contracts\ConfigConvertible;
 
 class DefaultSchema implements ConfigConvertible
@@ -15,7 +18,7 @@ class DefaultSchema implements ConfigConvertible
                 UsersQuery::class,
             ],
             'mutation' => [
-                ExampleMutation::class,
+                UpdateUserPasswordMutation::class,
             ],
             'types' => [
                 UserType::class,
