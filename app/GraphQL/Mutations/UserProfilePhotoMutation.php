@@ -4,54 +4,53 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\User;
 use Closure;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class UpdateUserPasswordMutation extends Mutation
+class UserProfilePhotoMutation extends Mutation
 {
    protected $attributes = [
-      'name' => 'updateUserPassword'
+      'name' => 'userProfilePhoto',
    ];
 
    public function type(): Type
    {
-      return Type::nonNull(GraphQL::type('User'));
+      return GraphQL::type('User');
    }
 
    public function args(): array
    {
       return [
-         'id' => [
-            'name' => 'id', 
+         'id'             => [
+            'name' => 'id',
             'type' => Type::nonNull(Type::int()),
          ],
-         'password' => [
-            'name' => 'password', 
-            'type' => Type::nonNull(Type::string()),
-         ]
+         'profilePicture' => [
+            'name' => 'profilePicture',
+            'type' => GraphQL::type('Upload'),
+         ],
       ];
    }
 
    protected function rules(array $args = []): array
    {
       return [
-         'id'       => ['required', 'numeric', 'exists:users,id'],
-         'password' => ['required', 'min:8'],
+         'id'             => ['required', 'numeric', 'exists:users,id'],
+         'profilePicture' => ['required', 'image', 'max:1500'],
       ];
    }
 
    public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
    {
+      $file = $args['profilePicture'];
+
+      // TODO: store file
+
       $user = User::find($args['id']);
 
-      if (!$user) {
-         return null;
-      }
-
-      $user->password = bcrypt($args['password']);
-      $user->save();
+      // Do something with file here...
 
       return $user;
    }
