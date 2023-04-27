@@ -25,7 +25,7 @@ class UpdateUserEmailMutation extends Mutation
       return [
          'id' => [
             'name' => 'id', 
-            'type' => Type::string(),
+            'type' => Type::int(),
          ],
          'email' => [
             'name' => 'email', 
@@ -37,9 +37,8 @@ class UpdateUserEmailMutation extends Mutation
    protected function rules(array $args = []): array
    {
       return [
-         'id' => ['required'],
+         'id'    => ['required', 'numeric', 'exists:users,id'],
          'email' => ['required', 'email'],
-         // 'password' => $args['id'] !== 1337 ? ['required'] : [],
       ];
    }
 

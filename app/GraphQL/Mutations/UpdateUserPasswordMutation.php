@@ -25,12 +25,20 @@ class UpdateUserPasswordMutation extends Mutation
       return [
          'id' => [
             'name' => 'id', 
-            'type' => Type::nonNull(Type::string()),
+            'type' => Type::nonNull(Type::int()),
          ],
          'password' => [
             'name' => 'password', 
             'type' => Type::nonNull(Type::string()),
          ]
+      ];
+   }
+
+   protected function rules(array $args = []): array
+   {
+      return [
+         'id'       => ['required', 'numeric', 'exists:users,id'],
+         'password' => ['required', 'min:8'],
       ];
    }
 
