@@ -19,7 +19,7 @@ class UserType extends GraphQLType
    {
       return [
          'id' => [
-            'type' => Type::nonNull(Type::string()),
+            'type' => Type::nonNull(Type::int()),
             'description' => 'The id of the user',
             // Use 'alias', if the database column is different from the type name.
             // This is supported for discrete values as well as relations.
